@@ -1,3 +1,7 @@
+plugins {
+	id 'org.sonarqube' version '7.4.0.8496'
+}
+
 description = "Spring TestContext Framework"
 
 apply plugin: "kotlin"
@@ -118,4 +122,14 @@ test {
 	systemProperty("junit.vintage.discovery.issue.reporting.enabled", "false")
 	// Optionally configure Java Util Logging for the JUnit Platform.
 	// systemProperty("java.util.logging.manager", "org.apache.logging.log4j.jul.LogManager")
+}
+
+// This module is analyzed as its own SonarQube project.
+sonar {
+	properties {
+		property 'sonar.projectKey', 'org.springframework:spring-test'
+		property 'sonar.projectName', 'Spring TestContext Framework'
+		property 'sonar.projectVersion', project.version
+		property 'sonar.sourceEncoding', 'UTF-8'
+	}
 }
