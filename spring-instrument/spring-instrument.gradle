@@ -1,3 +1,7 @@
+plugins {
+	id 'org.sonarqube' version '7.4.0.8496'
+}
+
 description = "Spring Instrument"
 
 jar {
@@ -12,4 +16,14 @@ jar {
 
 nullability {
 	requireExplicitNullMarking = false
+}
+
+// This module is analyzed as its own SonarQube project.
+sonar {
+	properties {
+		property 'sonar.projectKey', 'org.springframework:spring-instrument'
+		property 'sonar.projectName', 'Spring Instrument'
+		property 'sonar.projectVersion', project.version
+		property 'sonar.sourceEncoding', 'UTF-8'
+	}
 }
