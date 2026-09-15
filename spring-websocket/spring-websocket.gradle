@@ -1,3 +1,7 @@
+plugins {
+	id 'org.sonarqube' version '7.4.0.8496'
+}
+
 description = "Spring WebSocket"
 
 dependencies {
@@ -21,4 +25,14 @@ dependencies {
 	testImplementation("io.projectreactor.netty:reactor-netty-http")
 	testImplementation("org.apache.tomcat.embed:tomcat-embed-core")
 	testImplementation("org.apache.tomcat.embed:tomcat-embed-websocket")
+}
+
+// This module is analyzed as its own SonarQube project.
+sonar {
+	properties {
+		property 'sonar.projectKey', 'org.springframework:spring-websocket'
+		property 'sonar.projectName', 'Spring WebSocket'
+		property 'sonar.projectVersion', project.version
+		property 'sonar.sourceEncoding', 'UTF-8'
+	}
 }
