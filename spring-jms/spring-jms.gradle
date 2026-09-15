@@ -1,3 +1,7 @@
+plugins {
+	id 'org.sonarqube' version '7.4.0.8496'
+}
+
 description = "Spring JMS"
 
 dependencies {
@@ -23,4 +27,14 @@ dependencies {
 	testImplementation("io.micrometer:micrometer-observation-test")
 	testImplementation("org.apache.activemq:artemis-junit-5")
 	testImplementation("org.apache.activemq:artemis-jakarta-client")
+}
+
+// This module is analyzed as its own SonarQube project.
+sonar {
+	properties {
+		property 'sonar.projectKey', 'org.springframework:spring-jms'
+		property 'sonar.projectName', 'Spring JMS'
+		property 'sonar.projectVersion', project.version
+		property 'sonar.sourceEncoding', 'UTF-8'
+	}
 }
