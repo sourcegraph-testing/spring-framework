@@ -3,6 +3,7 @@ import org.springframework.build.shadow.ShadowSource
 
 plugins {
 	id 'org.springframework.build.multiReleaseJar'
+	id 'org.sonarqube' version '7.4.0.8496'
 }
 
 description = "Spring Core"
@@ -167,3 +168,13 @@ eclipse {
 }
 
 tasks['eclipse'].dependsOn(javapoetRepackJar, javapoetSourceJar, objenesisRepackJar, objenesisSourceJar)
+
+// This module is analyzed as its own SonarQube project.
+sonar {
+	properties {
+		property 'sonar.projectKey', 'org.springframework:spring-core'
+		property 'sonar.projectName', 'Spring Core'
+		property 'sonar.projectVersion', project.version
+		property 'sonar.sourceEncoding', 'UTF-8'
+	}
+}
