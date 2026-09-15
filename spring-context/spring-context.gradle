@@ -1,5 +1,6 @@
 plugins {
 	id 'org.springframework.build.runtimehints-agent'
+	id 'org.sonarqube' version '7.4.0.8496'
 }
 
 description = "Spring Context"
@@ -56,4 +57,14 @@ dependencies {
 	// Substitute for javax.management:jmxremote_optional:1.0.1_04 (not available on Maven Central)
 	testRuntimeOnly("org.glassfish.external:opendmk_jmxremote_optional_jar")
 	testRuntimeOnly("org.javamoney:moneta")
+}
+
+// This module is analyzed as its own SonarQube project.
+sonar {
+	properties {
+		property 'sonar.projectKey', 'org.springframework:spring-context'
+		property 'sonar.projectName', 'Spring Context'
+		property 'sonar.projectVersion', project.version
+		property 'sonar.sourceEncoding', 'UTF-8'
+	}
 }
