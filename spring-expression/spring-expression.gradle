@@ -1,3 +1,7 @@
+plugins {
+	id 'org.sonarqube' version '7.4.0.8496'
+}
+
 description = "Spring Expression Language (SpEL)"
 
 apply plugin: "kotlin"
@@ -9,4 +13,14 @@ dependencies {
 	testImplementation("org.jetbrains.kotlin:kotlin-reflect")
 	testImplementation("org.jetbrains.kotlin:kotlin-stdlib")
 	testImplementation("com.fasterxml.jackson.core:jackson-databind")
+}
+
+// This module is analyzed as its own SonarQube project.
+sonar {
+	properties {
+		property 'sonar.projectKey', 'org.springframework:spring-expression'
+		property 'sonar.projectName', 'Spring Expression Language (SpEL)'
+		property 'sonar.projectVersion', project.version
+		property 'sonar.sourceEncoding', 'UTF-8'
+	}
 }
