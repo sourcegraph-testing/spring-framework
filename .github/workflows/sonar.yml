@@ -1,0 +1,56 @@
+name: SonarQube
+on:
+  push:
+    branches:
+      - 'main'
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  sonar:
+    name: SonarQube (${{ matrix.module }})
+    runs-on: ${{ vars.UBUNTU_MEDIUM || 'ubuntu-latest' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        module:
+          - spring-aop
+          - spring-aspects
+          - spring-beans
+          - spring-context
+          - spring-context-indexer
+          - spring-context-support
+          - spring-core
+          - spring-core-test
+          - spring-expression
+          - spring-instrument
+          - spring-jdbc
+          - spring-jms
+          - spring-messaging
+          - spring-orm
+          - spring-oxm
+          - spring-r2dbc
+          - spring-test
+          - spring-tx
+          - spring-web
+          - spring-webflux
+          - spring-webmvc
+          - spring-websocket
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-${{ matrix.module }}
+    steps:
+      - name: Check Out Code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Prepare Gradle Build
+        uses: ./.github/actions/prepare-gradle-build
+        with:
+          develocity-access-key: ${{ secrets.DEVELOCITY_ACCESS_KEY }}
+          java-distribution: 'liberica'
+          java-early-access: 'false'
+          java-toolchain: 'false'
+          java-version: '25'
+      - name: Test and Scan
+        env:
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: ./gradlew :${{ matrix.module }}:test :${{ matrix.module }}:sonar

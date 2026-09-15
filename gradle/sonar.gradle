@@ -1,0 +1,11 @@
+// Configures standalone per-module SonarQube projects when applied from the root build.
+apply plugin: 'org.sonarqube'
+
+sonar {
+	properties {
+		property 'sonar.projectKey', "org.springframework:${project.name}"
+		property 'sonar.projectName', project.description ?: project.name
+		property 'sonar.projectVersion', project.version
+		property 'sonar.sourceEncoding', 'UTF-8'
+	}
+}
