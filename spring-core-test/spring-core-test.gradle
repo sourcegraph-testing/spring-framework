@@ -1,3 +1,7 @@
+plugins {
+	id 'org.sonarqube' version '7.4.0.8496'
+}
+
 description = "Spring Core Test"
 
 dependencies {
@@ -15,5 +19,15 @@ jar {
 			'Premain-Class': 'org.springframework.aot.agent.RuntimeHintsAgent',
 			'Can-Redefine-Classes': 'true'
 		)
+	}
+}
+
+// This module is analyzed as its own SonarQube project.
+sonar {
+	properties {
+		property 'sonar.projectKey', 'org.springframework:spring-core-test'
+		property 'sonar.projectName', 'Spring Core Test'
+		property 'sonar.projectVersion', project.version
+		property 'sonar.sourceEncoding', 'UTF-8'
 	}
 }
