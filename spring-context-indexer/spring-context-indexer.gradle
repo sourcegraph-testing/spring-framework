@@ -1,3 +1,7 @@
+plugins {
+	id 'org.sonarqube' version '7.4.0.8496'
+}
+
 description = "Spring Context Indexer"
 
 dependencies {
@@ -10,4 +14,14 @@ dependencies {
 
 nullability {
 	requireExplicitNullMarking = false
+}
+
+// This module is analyzed as its own SonarQube project.
+sonar {
+	properties {
+		property 'sonar.projectKey', 'org.springframework:spring-context-indexer'
+		property 'sonar.projectName', 'Spring Context Indexer'
+		property 'sonar.projectVersion', project.version
+		property 'sonar.sourceEncoding', 'UTF-8'
+	}
 }
