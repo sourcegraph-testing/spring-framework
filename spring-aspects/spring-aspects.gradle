@@ -1,3 +1,7 @@
+plugins {
+	id 'org.sonarqube' version '7.4.0.8496'
+}
+
 description = "Spring Aspects"
 
 apply plugin: "io.freefair.aspectj"
@@ -41,4 +45,14 @@ dependencies {
 eclipse.project {
 	natures += "org.eclipse.ajdt.ui.ajnature"
 	buildCommands = [new org.gradle.plugins.ide.eclipse.model.BuildCommand("org.eclipse.ajdt.core.ajbuilder")]
+}
+
+// This module is analyzed as its own SonarQube project.
+sonar {
+	properties {
+		property 'sonar.projectKey', 'org.springframework:spring-aspects'
+		property 'sonar.projectName', 'Spring Aspects'
+		property 'sonar.projectVersion', project.version
+		property 'sonar.sourceEncoding', 'UTF-8'
+	}
 }
