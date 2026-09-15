@@ -2,6 +2,7 @@ import com.github.bjornvester.xjc.XjcTask
 
 plugins {
 	id "com.github.bjornvester.xjc"
+	id 'org.sonarqube' version '7.4.0.8496'
 }
 
 description = "Spring Object/XML Marshalling"
@@ -36,3 +37,13 @@ tasks.named("xjc", XjcTask).configure {
 // 2) Attach XJC output only to the test source sets via lazy providers.
 sourceSets.test.java.srcDir(tasks.named("xjc", XjcTask).flatMap { it.outputJavaDir })
 sourceSets.test.resources.srcDir(tasks.named("xjc", XjcTask).flatMap { it.outputResourcesDir })
+
+// This module is analyzed as its own SonarQube project.
+sonar {
+	properties {
+		property 'sonar.projectKey', 'org.springframework:spring-oxm'
+		property 'sonar.projectName', 'Spring Object/XML Marshalling'
+		property 'sonar.projectVersion', project.version
+		property 'sonar.sourceEncoding', 'UTF-8'
+	}
+}
