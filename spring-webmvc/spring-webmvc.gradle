@@ -1,3 +1,7 @@
+plugins {
+	id 'org.sonarqube' version '7.4.0.8496'
+}
+
 description = "Spring Web MVC"
 
 apply plugin: "kotlin"
@@ -81,4 +85,14 @@ dependencies {
 	testRuntimeOnly("org.jruby:jruby")
 	testRuntimeOnly("org.python:jython-standalone")
 	testRuntimeOnly("org.webjars:momentjs:2.29.4")
+}
+
+// This module is analyzed as its own SonarQube project.
+sonar {
+	properties {
+		property 'sonar.projectKey', 'org.springframework:spring-webmvc'
+		property 'sonar.projectName', 'Spring Web MVC'
+		property 'sonar.projectVersion', project.version
+		property 'sonar.sourceEncoding', 'UTF-8'
+	}
 }
