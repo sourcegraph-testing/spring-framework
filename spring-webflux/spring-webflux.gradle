@@ -1,3 +1,7 @@
+plugins {
+	id 'org.sonarqube' version '7.4.0.8496'
+}
+
 description = "Spring WebFlux"
 
 apply plugin: "kotlin"
@@ -66,4 +70,14 @@ dependencies {
 
 test {
 	maxParallelForks = 4
+}
+
+// This module is analyzed as its own SonarQube project.
+sonar {
+	properties {
+		property 'sonar.projectKey', 'org.springframework:spring-webflux'
+		property 'sonar.projectName', 'Spring WebFlux'
+		property 'sonar.projectVersion', project.version
+		property 'sonar.sourceEncoding', 'UTF-8'
+	}
 }
