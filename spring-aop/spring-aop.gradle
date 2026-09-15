@@ -1,3 +1,7 @@
+plugins {
+	id 'org.sonarqube' version '7.4.0.8496'
+}
+
 description = "Spring AOP"
 
 apply plugin: "kotlin"
@@ -15,4 +19,14 @@ dependencies {
 	testImplementation(testFixtures(project(":spring-beans")))
 	testImplementation(testFixtures(project(":spring-core")))
 	testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+}
+
+// This module is analyzed as its own SonarQube project.
+sonar {
+	properties {
+		property 'sonar.projectKey', 'org.springframework:spring-aop'
+		property 'sonar.projectName', 'Spring AOP'
+		property 'sonar.projectVersion', project.version
+		property 'sonar.sourceEncoding', 'UTF-8'
+	}
 }
