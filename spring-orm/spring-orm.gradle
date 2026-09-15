@@ -1,3 +1,7 @@
+plugins {
+	id 'org.sonarqube' version '7.4.0.8496'
+}
+
 description = "Spring Object/Relational Mapping"
 
 dependencies {
@@ -20,4 +24,14 @@ dependencies {
 	testImplementation("org.aspectj:aspectjweaver")
 	testImplementation("org.hsqldb:hsqldb")
 	testRuntimeOnly("jakarta.xml.bind:jakarta.xml.bind-api")
+}
+
+// This module is analyzed as its own SonarQube project.
+sonar {
+	properties {
+		property 'sonar.projectKey', 'org.springframework:spring-orm'
+		property 'sonar.projectName', 'Spring Object/Relational Mapping'
+		property 'sonar.projectVersion', project.version
+		property 'sonar.sourceEncoding', 'UTF-8'
+	}
 }
