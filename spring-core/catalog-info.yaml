@@ -1,0 +1,16 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: spring-core
+  description: Spring Core
+  annotations:
+    github.com/project-slug: sourcegraph-testing/spring-framework
+    backstage.io/source-location: url:https://github.com/sourcegraph-testing/spring-framework/tree/main/spring-core/
+  tags:
+    - java
+    - spring
+spec:
+  type: library
+  lifecycle: production
+  owner: spring-framework-team
+  subcomponentOf: component:spring-framework
