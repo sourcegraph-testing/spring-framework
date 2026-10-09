@@ -1,0 +1,16 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: framework-docs
+  description: Spring Framework Docs
+  annotations:
+    github.com/project-slug: sourcegraph-testing/spring-framework
+    backstage.io/source-location: url:https://github.com/sourcegraph-testing/spring-framework/tree/main/framework-docs/
+  tags:
+    - java
+    - spring
+spec:
+  type: documentation
+  lifecycle: production
+  owner: spring-framework-team
+  subcomponentOf: component:spring-framework
